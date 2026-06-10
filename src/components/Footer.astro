@@ -8,23 +8,18 @@ type Props = {
 } & HTMLAttributes<"footer">;
 
 const { noMarginTop = false, class: className, ...attrs } = Astro.props;
+void noMarginTop;
 
 const t = useTranslations(Astro.currentLocale);
 const currentYear = new Date().getFullYear();
 ---
 
-<footer
-  class:list={["app-layout", { "mt-auto": !noMarginTop }, className]}
-  {...attrs}
->
+<footer class:list={["mt-auto", className]} {...attrs}>
   <div
-    class="border-border flex flex-col items-center justify-between border-t py-6 sm:flex-row-reverse sm:py-4"
+    class="bg-foreground text-background mt-16 flex min-h-9 flex-col items-center justify-center gap-1 px-4 py-3 text-center text-xs sm:flex-row"
   >
+    <span>{t.footer.copyright} &#169; {currentYear} Jinghao.</span>
+    <span class="hidden sm:inline">Hosted by GitHub Pages.</span>
     <Socials />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>{t.footer.copyright} &#169; {currentYear}</span>
-      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-      <span>{t.footer.allRightsReserved}</span>
-    </div>
   </div>
 </footer>

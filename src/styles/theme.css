@@ -7,28 +7,30 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --font-app: var(--font-google-sans-code);
+  --font-app:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
 }
 
 /* Light theme values */
 :root,
 [data-theme="light"] {
   --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
+  --foreground: #161616;
+  --accent: #c500a8;
   --accent-foreground: #ffffff;
-  --muted: #e6e6e6;
-  --muted-foreground: #6b7280;
-  --border: #ece9e9;
+  --muted: #f0f0f0;
+  --muted-foreground: #666666;
+  --border: #e5e5e5;
 }
 
 /* Dark theme values */
 [data-theme="dark"] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
+  --background: #111111;
+  --foreground: #f2f2f2;
+  --accent: #ff66df;
   --accent-foreground: #ffffff;
-  --muted: #343f60;
-  --muted-foreground: #afb9ca;
-  --border: #ab4b08;
+  --muted: #1e1e1e;
+  --muted-foreground: #bdbdbd;
+  --border: #333333;
 }

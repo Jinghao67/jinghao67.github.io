@@ -1,37 +1,22 @@
 ---
-title: "About"
-description: "A bit about me and this blog."
+title: "about"
+description: "About Jinghao and this website."
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+这里是 Jinghao 的个人主页。
 
-![Astro Paper](@/assets/images/astropaper-og.jpg)
+这个网站会放三类内容：一是关于我的长期介绍，二是 blog 里的文章和笔记，三是 publications 里的论文、预印本或研究项目。
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+## bio
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+这里可以写你的教育经历、研究方向、工作经历、正在做的项目，以及你希望别人快速了解你的三五句话。
 
-## Features
+## interests
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+- AI / systems / research
+- engineering tools and productivity
+- reading, writing, and long-term thinking
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
+## contact
 
-and so much more.
-
-## Show your support
-
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
-
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
-
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
-
-Kyay zuu! 🙏🏼
+把邮箱、GitHub、Google Scholar、X、LinkedIn 等链接加到 `astro-paper.config.ts` 的 `socials` 里，它们会自动出现在页脚。

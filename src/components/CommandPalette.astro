@@ -1,0 +1,239 @@
+---
+import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { publications } from "@/data/publications";
+import config from "@/config";
+
+type Command = {
+  id: string;
+  title: string;
+  section: string;
+  href?: string;
+  action?: "theme-light" | "theme-dark" | "theme-system";
+};
+
+const locale = Astro.currentLocale ?? config.site.lang;
+const posts = getSortedPosts(await getCollection("posts"));
+
+const commands: Command[] = [
+  {
+    id: "nav-about",
+    title: "about",
+    section: "Navigation",
+    href: getRelativeLocaleUrl(locale, ""),
+  },
+  {
+    id: "nav-blog",
+    title: "blog",
+    section: "Navigation",
+    href: getRelativeLocaleUrl(locale, "blog"),
+  },
+  {
+    id: "nav-publications",
+    title: "publications",
+    section: "Navigation",
+    href: getRelativeLocaleUrl(locale, "publications"),
+  },
+  ...posts.map(post => ({
+    id: `post-${post.id}`,
+    title: post.data.title,
+    section: "Blog",
+    href: getPostUrl(post.id, post.filePath, locale),
+  })),
+  ...publications.map((publication, index) => ({
+    id: `publication-${index}`,
+    title: publication.title,
+    section: "Publications",
+    href: getRelativeLocaleUrl(locale, "publications"),
+  })),
+  {
+    id: "theme-light",
+    title: "Change theme to light",
+    section: "Theme",
+    action: "theme-light",
+  },
+  {
+    id: "theme-dark",
+    title: "Change theme to dark",
+    section: "Theme",
+    action: "theme-dark",
+  },
+  {
+    id: "theme-system",
+    title: "Use system theme",
+    section: "Theme",
+    action: "theme-system",
+  },
+];
+
+const commandData = JSON.stringify(commands).replace(/</g, "\\u003c");
+---
+
+<div
+  id="command-palette"
+  class="fixed inset-0 z-50 hidden bg-black/35 px-4 py-20 backdrop-blur-sm"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Command palette"
+>
+  <div
+    class="border-border bg-background text-foreground mx-auto max-w-xl overflow-hidden rounded-md border shadow-2xl"
+  >
+    <label class="sr-only" for="command-palette-input">Search commands</label>
+    <input
+      id="command-palette-input"
+      class="border-border w-full border-b bg-transparent px-4 py-3 text-base outline-none"
+      placeholder="Type to start searching"
+      autocomplete="off"
+    />
+    <ul id="command-palette-results" class="max-h-96 overflow-y-auto p-2"></ul>
+  </div>
+</div>
+
+<div id="command-palette-data" hidden data-commands={commandData}></div>
+
+<script is:inline>
+  function setupCommandPalette() {
+    const overlay = document.querySelector("#command-palette");
+    const input = document.querySelector("#command-palette-input");
+    const results = document.querySelector("#command-palette-results");
+    const data = document.querySelector("#command-palette-data");
+    const trigger = document.querySelector("#command-palette-trigger");
+
+    if (!overlay || !input || !results || !data) return;
+    if (overlay.dataset.ready === "true") return;
+    overlay.dataset.ready = "true";
+
+    const commands = JSON.parse(data.dataset.commands || "[]");
+    let filtered = commands;
+    let activeIndex = 0;
+
+    function setTheme(value) {
+      const root = document.firstElementChild;
+      const theme =
+        value === "system"
+          ? window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light"
+          : value;
+
+      if (value === "system") localStorage.removeItem("theme");
+      else localStorage.setItem("theme", theme);
+
+      root?.setAttribute("data-theme", theme);
+      root?.classList.toggle("dark", theme === "dark");
+      document.querySelector("#theme-btn")?.setAttribute("aria-label", theme);
+      document
+        .querySelector("meta[name='theme-color']")
+        ?.setAttribute(
+          "content",
+          getComputedStyle(document.body).backgroundColor
+        );
+    }
+
+    function run(command) {
+      if (!command) return;
+      if (command.href) window.location.href = command.href;
+      if (command.action === "theme-light") setTheme("light");
+      if (command.action === "theme-dark") setTheme("dark");
+      if (command.action === "theme-system") setTheme("system");
+      closePalette();
+    }
+
+    function render() {
+      results.innerHTML = "";
+      const shown = filtered.slice(0, 12);
+
+      if (shown.length === 0) {
+        const empty = document.createElement("li");
+        empty.className = "px-3 py-6 text-center text-sm opacity-70";
+        empty.textContent = "No results";
+        results.appendChild(empty);
+        return;
+      }
+
+      for (const [index, command] of shown.entries()) {
+        const item = document.createElement("li");
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className =
+          "flex w-full items-center justify-between rounded px-3 py-2 text-left text-sm";
+        if (index === activeIndex) button.classList.add("bg-muted");
+
+        const title = document.createElement("span");
+        title.textContent = command.title;
+        const section = document.createElement("span");
+        section.className = "text-muted-foreground ms-4 text-xs";
+        section.textContent = command.section;
+
+        button.append(title, section);
+        button.addEventListener("click", () => run(command));
+        item.appendChild(button);
+        results.appendChild(item);
+      }
+    }
+
+    function filter() {
+      const query = input.value.trim().toLowerCase();
+      filtered = query
+        ? commands.filter(command =>
+            `${command.title} ${command.section}`.toLowerCase().includes(query)
+          )
+        : commands;
+      activeIndex = 0;
+      render();
+    }
+
+    function openPalette() {
+      overlay.classList.remove("hidden");
+      filter();
+      requestAnimationFrame(() => input.focus());
+    }
+
+    function closePalette() {
+      overlay.classList.add("hidden");
+      input.value = "";
+    }
+
+    trigger?.addEventListener("click", openPalette);
+    overlay.addEventListener("click", event => {
+      if (event.target === overlay) closePalette();
+    });
+    input.addEventListener("input", filter);
+    input.addEventListener("keydown", event => {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        activeIndex = Math.min(
+          activeIndex + 1,
+          Math.min(filtered.length, 12) - 1
+        );
+        render();
+      }
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        activeIndex = Math.max(activeIndex - 1, 0);
+        render();
+      }
+      if (event.key === "Enter") {
+        event.preventDefault();
+        run(filtered[activeIndex]);
+      }
+      if (event.key === "Escape") closePalette();
+    });
+
+    document.addEventListener("keydown", event => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        openPalette();
+      }
+      if (event.key === "Escape" && !overlay.classList.contains("hidden")) {
+        closePalette();
+      }
+    });
+  }
+
+  setupCommandPalette();
+  document.addEventListener("astro:after-swap", setupCommandPalette);
+</script>
