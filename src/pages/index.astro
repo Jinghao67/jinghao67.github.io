@@ -27,8 +27,8 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
 
   <main id="main-content" data-layout="index" class="app-layout pt-12">
     <section class="grid gap-8 md:grid-cols-[1fr_17rem] md:items-start">
-      <div class="space-y-5 text-base leading-7">
-        <h1 class="text-4xl font-light sm:text-5xl">
+      <div class="space-y-5 text-[1.1rem] leading-[1.6]">
+        <h1 class="text-[2.5rem] leading-tight font-light">
           <span class="font-bold">Jinghao Zhang</span>
         </h1>
 
@@ -89,7 +89,7 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
           class="border-border mx-auto aspect-square w-full max-w-72 rounded border object-cover md:max-w-none"
           loading="eager"
         />
-        <div class="mt-4 font-mono text-sm leading-6">
+        <div class="mt-4 font-mono text-[1.1rem] leading-[1.55]">
           <p>Jinghao Zhang (张景皓)</p>
           <p>
             <a
@@ -119,7 +119,7 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
     </section>
 
     <section class="mt-12">
-      <h2 class="mb-4 text-3xl font-light">
+      <h2 class="mb-4 text-[2rem] leading-tight font-light">
         <a
           href={getRelativeLocaleUrl(locale, "blog")}
           class="hover:text-accent"
@@ -135,7 +135,7 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
               <tbody>
                 {posts.map(post => (
                   <tr>
-                    <th class="text-muted-foreground w-36 pe-4 align-top text-sm font-normal whitespace-nowrap">
+                    <th class="text-muted-foreground w-36 pe-4 align-top text-base font-normal whitespace-nowrap">
                       <time datetime={post.data.pubDatetime.toISOString()}>
                         {dateFormatter.format(post.data.pubDatetime)}
                       </time>
@@ -160,7 +160,7 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
     </section>
 
     <section class="mt-12">
-      <h2 class="mb-6 text-3xl font-light">
+      <h2 class="mb-6 text-[2rem] leading-tight font-light">
         <a
           href={getRelativeLocaleUrl(locale, "publications")}
           class="hover:text-accent"
@@ -182,7 +182,7 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
                 />
               )}
               <article>
-                <h3 class="text-accent text-lg font-semibold">
+                <h3 class="text-accent text-base font-semibold">
                   {publication.title}
                 </h3>
                 <p class="mt-1">{publication.authors}</p>
@@ -190,7 +190,9 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
                   {publication.venue}, {publication.year}
                 </p>
                 {publication.summary && (
-                  <p class="mt-2 text-sm leading-6">{publication.summary}</p>
+                  <p class="mt-2 text-base leading-[1.5]">
+                    {publication.summary}
+                  </p>
                 )}
                 {publication.links && publication.links.length > 0 && (
                   <div class="mt-2 flex flex-wrap gap-2">
