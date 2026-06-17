@@ -34,28 +34,52 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
 
         <p>
           Hi, I am <strong>Jinghao Zhang</strong>, an undergraduate student at
-          Shandong University.
+          <span class="text-accent">Shandong University</span>.
         </p>
 
         <p>
-          I previously worked as a Research Assistant (RA) at the Trustworthy
-          and General Artificial Intelligence Laboratory (TGAI), Westlake
-          University, under the supervision of Prof. Yaochu Jin, where I studied
-          brain-inspired Embodied AI.
+          I previously worked as a <strong>Research Assistant (RA)</strong> at the
+          <span class="text-accent"
+            >Trustworthy and General Artificial Intelligence Laboratory (TGAI)</span
+          >,
+          <span class="text-accent">Westlake University</span>, under the
+          supervision of
+          <strong>Prof. Yaochu Jin</strong>, where I studied
+          <strong>brain-inspired Embodied AI</strong>.
         </p>
 
         <p>
-          I am now conducting research at the General Artificial Intelligence
-          Lab (GAI Lab), Shandong University, advised by Prof. Keji He. My
-          research interests include theoretical world models, especially how
-          models can fundamentally develop the capacity for world modeling, and
-          representation learning.
+          I am now conducting research at the <span class="text-accent"
+            >General Artificial Intelligence Lab (GAI Lab)</span
+          >, Shandong University, advised by <strong>Prof. Keji He</strong>. My
+          research interests include <strong>theoretical world models</strong>,
+          especially how models can fundamentally develop the capacity for world
+          modeling, and <strong>representation learning</strong>.
         </p>
 
         <p>
-          Below are my research experiences and publications. If you would like
-          to know me better, you may enjoy reading my research stories and blog
-          posts.
+          Below are my <strong>research experiences</strong> and
+          <strong>publications</strong>. If you would like to know me better,
+          you may enjoy reading my
+          <a
+            href={getRelativeLocaleUrl(locale, "about")}
+            class="text-accent hover:underline"
+          >
+            research stories
+          </a>
+          and
+          <a
+            href={getRelativeLocaleUrl(locale, "blog")}
+            class="text-accent hover:underline"
+          >
+            blog posts
+          </a>.
+          <a
+            href="/uploads/Jinghao_Zhang_CV.pdf"
+            class="text-accent hover:underline"
+          >
+            Get my CV here.
+          </a>
         </p>
       </div>
 
@@ -69,7 +93,13 @@ const dateFormatter = new Intl.DateTimeFormat(locale, {
         <div class="mt-4 font-mono text-sm leading-6">
           <p>Jinghao</p>
           <p>your.email@example.com</p>
-          <p>GitHub / Scholar / CV</p>
+          <p>
+            GitHub / Scholar /
+            <a
+              href="/uploads/Jinghao_Zhang_CV.pdf"
+              class="text-accent hover:underline">CV</a
+            >
+          </p>
         </div>
       </aside>
     </section>
