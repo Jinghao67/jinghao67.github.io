@@ -16,28 +16,15 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
-    title: "Your Research Project Title",
-    authors: "Jinghao, Collaborator A, Collaborator B",
-    venue: "arXiv preprint",
+    title:
+      "SaToMe: Salience-Driven Token Merging for Omni-Capable Diffusion MLLMs",
+    authors: "Anonymous ACL submission",
+    venue: "EMNLP 2026 submission",
     year: 2026,
     summary:
-      "One concise sentence about the central idea, contribution, or result.",
+      "A training-free token-merging method that uses local representational uniqueness from hidden states and update directions to accelerate both text-to-image generation and image-to-text understanding, achieving substantial wall-clock speedups on LLaDA-o and LaViDa while preserving task quality.",
     image: "/uploads/publication-placeholder.svg",
     selected: true,
-    links: [
-      { label: "PDF", href: "#" },
-      { label: "Code", href: "#" },
-    ],
-  },
-  {
-    title: "Another Paper or Technical Report",
-    authors: "Jinghao and Collaborators",
-    venue: "Conference / Journal",
-    year: 2025,
-    summary:
-      "Replace this placeholder with a short, reader-friendly description.",
-    image: "/uploads/publication-placeholder.svg",
-    selected: true,
-    links: [{ label: "PDF", href: "#" }],
+    links: [{ label: "PDF", href: "/uploads/satome-emnlp.pdf" }],
   },
 ];
