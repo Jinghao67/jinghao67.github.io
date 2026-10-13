@@ -19,7 +19,7 @@ export const publications: Publication[] = [
     title:
       "SaToMe: Salience-Driven Token Merging for Omni-Capable Diffusion MLLMs",
     authors: "Anonymous ACL submission",
-    venue: "EMNLP 2026 submission",
+    venue: "EMNLP submission",
     year: 2026,
     summary:
       "A training-free token-merging method that uses local representational uniqueness from hidden states and update directions to accelerate both text-to-image generation and image-to-text understanding, achieving substantial wall-clock speedups on LLaDA-o and LaViDa while preserving task quality.",
