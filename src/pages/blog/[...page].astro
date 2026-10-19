@@ -5,10 +5,11 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
 import Main from "@/components/Main.astro";
-import Card from "@/components/Card.astro";
 import Footer from "@/components/Footer.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { getPostUrl } from "@/utils/getPostPaths";
+import { toTransitionName } from "@/utils/toTransitionName";
 import { useTranslations } from "@/i18n";
 import config from "@/config";
 
@@ -30,7 +31,24 @@ const t = useTranslations(locale);
 
   <Main pageTitle={t.pages.postsTitle} pageDesc={t.pages.postsDesc}>
     <ul>
-      {page.data.map(data => <Card {...data} />)}
+      {
+        page.data.map(post => (
+          <li class="my-6">
+            <a
+              href={getPostUrl(post.id, post.filePath, locale)}
+              class:list={[
+                "text-accent inline-block text-lg font-medium",
+                "decoration-dashed underline-offset-4 hover:underline",
+                "focus-visible:no-underline focus-visible:underline-offset-0",
+              ]}
+            >
+              <h2 transition:name={toTransitionName(post.data.title)}>
+                {post.data.title}
+              </h2>
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </Main>
 
