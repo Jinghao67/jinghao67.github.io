@@ -42,7 +42,7 @@ export const publications: Publication[] = [
     year: 2026,
     summary:
       "A training-free token-merging method that uses local representational uniqueness from hidden states and update directions to accelerate both text-to-image generation and image-to-text understanding, achieving substantial wall-clock speedups on LLaDA-o and LaViDa while preserving task quality.",
-    image: "/uploads/publication-placeholder.svg",
+    image: "/uploads/satome-figure3.png",
     selected: true,
     links: [{ label: "PDF", href: "/uploads/satome-emnlp.pdf" }],
   },

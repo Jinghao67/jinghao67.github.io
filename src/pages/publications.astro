@@ -34,7 +34,7 @@ const sortedPublications = [...publications].sort((a, b) => b.year - a.year);
                 <img
                   src={publication.image}
                   alt=""
-                  class="border-border mb-2 aspect-[4/3] w-full rounded border object-cover"
+                  class="border-border mb-2 aspect-[4/3] w-full rounded border object-contain"
                   loading={index === 0 ? "eager" : "lazy"}
                 />
               )}
