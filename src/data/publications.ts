@@ -16,6 +16,25 @@ export type Publication = {
 
 export const publications: Publication[] = [
   {
+    title: "Do ResNets Route? Sparse Interaction Experts in Residual Networks",
+    authors:
+      "Liang Yan, Siying Chen, Kaijie Chen, Bo Li, Jinghao Zhang, Mu Miao",
+    venue: "arXiv preprint",
+    year: 2026,
+    summary:
+      "Using an exact decomposition into residual-branch interactions, we show that pretrained ResNets exhibit input-dependent soft routing: different inputs emphasize different interactions, even though all residual blocks are executed.",
+    image: "/uploads/resnets-route.png",
+    selected: true,
+    links: [
+      { label: "arXiv", href: "https://arxiv.org/abs/2610.02907" },
+      { label: "PDF", href: "https://arxiv.org/pdf/2610.02907" },
+      {
+        label: "Code",
+        href: "https://github.com/yanliang3612/resnets-route-without-routers",
+      },
+    ],
+  },
+  {
     title:
       "SaToMe: Salience-Driven Token Merging for Omni-Capable Diffusion MLLMs",
     authors: "Anonymous ACL submission",
